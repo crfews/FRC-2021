@@ -8,6 +8,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 //import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+//import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.Joystick;
@@ -15,13 +17,13 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 //import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-//import edu.wpi.first.wpilibj.util.Color;
+import frc.robot.Contants.IO.ButtonBoard;
 
 public class Systems
 {
 
     public static Contants constants = new Contants();
+    public static ButtonBoard buttonBoard = new ButtonBoard();
 
 
     /**
@@ -215,7 +217,7 @@ public class Systems
      */
     public static void toggle(Joystick j){
         
-        if (j.getRawButtonPressed(7) == true){
+        if (j.getRawButtonPressed(buttonBoard.invertbutton) == true){
             if (i2 % 2 == 0){
                 inv = true;
                 i2++;
@@ -237,6 +239,7 @@ public class Systems
      * @param inverse If true, the robot orientation is flipped
      */
     public void driveTeleop(WPI_TalonSRX rMaster, WPI_TalonSRX lMaster, WPI_TalonSRX rSlave, WPI_TalonSRX lSlave, XboxController teemo, Joystick j) {
+        //remember to change this channel!!!
         toggle(j);
         double invert = 1;
         if (inv == true)

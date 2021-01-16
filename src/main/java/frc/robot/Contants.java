@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class Contants {
 
+    public static int kXController = 0;
+    public static int kJoystickChannel = 1;
     public double rCannonSpark = 1;
     public double lCannonSpark = 1;
     public double beltSpark = .5;
@@ -26,7 +28,7 @@ public class Contants {
 
          static class XController{
             //Xbox controller
-            public  XboxController m_drivexbcont = new XboxController(0);
+            public  XboxController m_drivexbcont = new XboxController(kXController);
 
             //Axises..Axi?...Axee?
             public  Double lXaxis = m_drivexbcont.getX(Hand.kLeft);
@@ -47,19 +49,18 @@ public class Contants {
             public  Boolean rBumper = m_drivexbcont.getBumper(Hand.kRight);
         }
 
-         static class ButtonBoard{
-            public  final Joystick m_buttonboard = new Joystick(1);
+        
+        static class ButtonBoard{
+            public final Joystick m_buttonboard = new Joystick(kJoystickChannel);
+            public final int invertbutton = 1;
+            //button used to invert the chassis
+    
 
+            
             //More buttons than you need
             public  Boolean button1(){
                 return m_buttonboard.getRawButton(1);
             } 
-            public  Boolean button2 = m_buttonboard.getRawButton(2);
-            public  Boolean button3 = m_buttonboard.getRawButton(3);
-            public  Boolean button4 = m_buttonboard.getRawButton(4);
-            public  Boolean button5 = m_buttonboard.getRawButton(5);
-            public  Boolean button6 = m_buttonboard.getRawButton(6);
-            public  Boolean button7 = m_buttonboard.getRawButton(7);
 
         }
         
