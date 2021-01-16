@@ -24,13 +24,18 @@ public class Systems
     public static Contants constants = new Contants();
 
 
+    /**
+     * sets encoder value of given talon to zero
+     * @param controller Xbox controller
+     * @param talon talon to set pos at zero
+     */
     public void setEncZero(XboxController controller, WPI_TalonSRX talon) 
     {
         
-
         if (controller.getRawButton(1) == true ) 
         {
             talon.setSelectedSensorPosition(0);
+            
         }
     }
 
@@ -52,6 +57,14 @@ public class Systems
      */
     static class InnerSystems {
     
+        /**
+     * configures Talons to settings of choice. These changes can also be made via Phwonix Tuner.
+     * @param lMaster 
+     * @param lSlave
+     * @param rSlave
+     * @param rSlave
+     * 
+     */
         public void configTalon(WPI_TalonSRX lMaster, WPI_TalonSRX rMaster,WPI_TalonSRX lSlave,WPI_TalonSRX rSlave){
             lMaster.configFactoryDefault();
             lSlave.configFactoryDefault();
@@ -85,7 +98,12 @@ public class Systems
             rSlave.configPeakOutputReverse(-1);
             rSlave.setNeutralMode(NeutralMode.Brake);
         }
-        //used to get the color from the game
+        /**
+         * used to get the color from the game; currently broken
+         * 
+         * 
+         * 
+         */
         public int gameData_Color()
         {
             String gameData = DriverStation.getInstance().getGameSpecificMessage();
@@ -121,7 +139,11 @@ public class Systems
         
         
     }
-
+   /**
+     * Converts feet to Encoder values
+     * @param ft input feet
+     * 
+     */
     public double feetToEnc(double ft){
         double pi = Math.PI;
 
@@ -132,6 +154,11 @@ public class Systems
         return encC;
     }
     
+    /**
+     * Moves climb moter
+     * @param spark spark motor
+     * @param X input xbox controller
+     */
     public void climb(Spark spark, XboxController x){
     
         if (x.getPOV() == 90){
@@ -175,8 +202,10 @@ public class Systems
         }
         
     }
+    
     public static boolean inv;
     public static int i2 = 0;
+    
     public static void toggle(Joystick j){
         
         if (j.getRawButtonPressed(7) == true){
@@ -281,10 +310,10 @@ public class Systems
     }
 
     /**
-     * dispalay
+     * This function sets the velocity of the left chassis motor to zero equal if both are different.
      * @param leftV disc
-     * 
-     * 
+     * @param leftTalonSRX left TalonSRX
+     * @param rightTalonSRX right TalonSRX
      * 
      */
     public void leftrealign(WPI_TalonSRX leftTalonSRX, WPI_TalonSRX rightTalonSRX, int leftV)
@@ -300,18 +329,24 @@ public class Systems
         }
     }
     /**
-     * 
+     * This function sets the velocity of the right chassis motor to zero equal if both are different.
+     * @param leftTalonSRX the left TalonSRX
+     * @param rightTalonSRX the right TalonSRX
      * @param rightV the velocity of the right motor controller
      */
-    public void rightrealight(WPI_TalonSRX leftTalon, WPI_TalonSRX rightTalonSRX, int rightV)
+    public void rightrealight(WPI_TalonSRX leftTalonSRX, WPI_TalonSRX rightTalonSRX, int rightV)
     {
         rightV = rightTalonSRX.getSelectedSensorVelocity();    
-        if (rightV != leftTalon.getSelectedSensorVelocity());
+        if (rightV != leftTalonSRX.getSelectedSensorVelocity());
         {
             rightTalonSRX.set(0);
         }
     }
 
+    /** This function raises or lowers the double solenoids.
+    *  @param x the state of the D - Pad; up raises it and down lowers it
+    *  @param sole the double solenoid that is being raised or lowered
+    */
     public void soloSolControl(XboxController x, Solenoid sole){
 
         if ( x.getPOV() == 0){
@@ -353,77 +388,5 @@ public class Systems
         }
     }
 
-    @Deprecated /* use soleControl */
-    public void solenoidsOut(Solenoid sole, Joystick controller)
-    {
-        if(controller.getRawButtonPressed(8) == true)
-        {
-            sole.set(true);
-        
-        }
-        
-        else
-        {                
-            sole.set(false);
-     
-        }
-    }
-    //to turn the intake for the cannon
-    @Deprecated /* use cannon() */
-    public void intake(Spark beltController, Spark lSpark, Spark rSpark, XboxController joystick)
-    {
-        if(joystick.getBumper(Hand.kRight) == true && joystick.getTriggerAxis(Hand.kRight) < .4)
-        {
-            beltController.set(.25);
-            lSpark.set(-.01);
-            rSpark.set(-.01);
-        }
-        else if (joystick.getBumper(Hand.kRight) == true && !(joystick.getTriggerAxis(Hand.kRight) < .4))
-        {
-            beltController.set(.25);
-        }else{
-            beltController.set(0);
-        }
-    }
-    @Deprecated /* use cannon() */
-    public void activate(XboxController joystick, Spark leftoutSpark, Spark rightoutSpark)
-    {
-        if(deadband(joystick.getTriggerAxis(Hand.kRight)) > .5)
-        {
-            leftoutSpark.set(1);
-            rightoutSpark.set(1);
-        }
-        else
-        {
-            leftoutSpark.set(0);
-            rightoutSpark.set(0);
-        }
-
-      //  spin();
-
-       
-    }
-
-    static class ColorSys
-    {
-    
-        public static Timer timer = new Timer();
-
-        /*
-        public void cwMovement(ColorSensorV3 sensor, Spark cwMotor, Double speed, Color initColor,TimerTask sensorGetColor, int desiredRotations){
-            int a = 0;
-            cwMotor.set(speed);
-            timer.schedule(sensorGetColor, 750); //.75 seconds
-            
-            
-        }
-        //public void colorStop(ColorSensorV3 cV3, String gdString)
-        {
-          
-          
-          
-        }
-        */
-    }
 }
 
