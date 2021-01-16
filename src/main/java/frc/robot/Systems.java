@@ -1,6 +1,6 @@
 package frc.robot;
 
-import java.util.Timer;
+//import java.util.Timer;
 //import java.util.TimerTask;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -206,6 +206,13 @@ public class Systems
     public static boolean inv;
     public static int i2 = 0;
     
+    
+    /**
+     * Toggles invert. NEEDS TO BE LOOKED AT AND FIXED
+     * ISSUE: currently set up as input = true, then invert. This is a problem as you need inhuman speed to click the button in under a few milliseconds
+     * FIX: add a button for the false statement.
+     * @return Returns the cubed double value
+     */
     public static void toggle(Joystick j){
         
         if (j.getRawButtonPressed(7) == true){
@@ -215,6 +222,7 @@ public class Systems
     
             }else{
                 inv = false;
+                i2++;
             }
         }
 
