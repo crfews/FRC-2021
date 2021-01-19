@@ -240,7 +240,6 @@ public class Systems
      */
     public void driveTeleop(WPI_TalonSRX rMaster, WPI_TalonSRX lMaster, WPI_TalonSRX rSlave, WPI_TalonSRX lSlave, XboxController teemo) {
         //remember to change this channel!!!
-        //toggle(j);
         double invert = 1;
         if (inv == true)
             invert = invert*-1;
