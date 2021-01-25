@@ -274,7 +274,7 @@ public class Systems
             {
                 l.set(1);
                 r.set(1);
-                b.set(.5);
+                b.set(Contants.bmotorspeed);
             }
             else if (x.getBumper(Hand.kRight) == false && (x.getBumper(Hand.kLeft) == false))
             {
@@ -293,7 +293,7 @@ public class Systems
             {
                 l.set(-.35);
                 r.set(-.35);
-                b.set(.5);
+                b.set(Contants.bmotorspeed);
             }
             else if (x.getBumper(Hand.kRight) == false && x.getBumper(Hand.kLeft) == false)
             {
@@ -303,7 +303,7 @@ public class Systems
             }else if (x.getBumper(Hand.kLeft) == true){
                 l.set(-.1);
                 r.set(-.1);
-                b.set(-.5);
+                b.set(-Contants.bmotorspeed);
             }
         }
         

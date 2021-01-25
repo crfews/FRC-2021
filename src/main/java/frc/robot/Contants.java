@@ -20,6 +20,7 @@ public class Contants {
     public double lCannonSpark = 1;
     public double beltSpark = .5;
     public double lift = 1;   //public double 
+    public static double bmotorspeed = 0.75;
 
 
      static class IO {
