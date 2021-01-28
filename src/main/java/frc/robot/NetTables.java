@@ -22,8 +22,4 @@ public class NetTables
         SmartDashboard.putNumber("right motor out %:", talonsrx.getSelectedSensorPosition());
         SmartDashboard.putBoolean("right Out of phase :", faults.SensorOutOfPhase);
     }
-
-    
-    
-
 }

@@ -22,6 +22,10 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj.util.Color;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -47,6 +51,8 @@ public class Robot extends TimedRobot {
   public static Contants.IO.XController xboxController = new Contants.IO.XController();
   public static Contants.IO.ButtonBoard buttonBoard = new Contants.IO.ButtonBoard();
   public static Contants.Objects objects = new Contants.Objects();
+  public static NetTables netTables = new NetTables();
+  public static NetworkTable limetable;
 
   // public static Systems ballIntake = new Systems();
 
@@ -72,8 +78,6 @@ public class Robot extends TimedRobot {
   //private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
   //private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
-  // trying to do the suggested integer part...
-
   @Override
   public void robotInit() {
     UsbCamera m_usbCamera = new UsbCamera("USB Camera 0", 0);
@@ -94,8 +98,6 @@ public class Robot extends TimedRobot {
     objects.lMaster.setSelectedSensorPosition(0);
     objects.rMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
     objects.rMaster.setSelectedSensorPosition(0);
-    // objects.rMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-    // m_encoder.setDistancePerPulse(1./256.);
 
     //m_colorMatcher.addColorMatch(kBlueTarget);
    // m_colorMatcher.addColorMatch(kGreenTarget);
@@ -157,11 +159,27 @@ public class Robot extends TimedRobot {
 
     // SmartDashboard.putNumber("IR", IR);
 
+    //Limelight Data
+    limetable = NetworkTableInstance.getDefault().getTable("limelight");
+    NetworkTableEntry tx = limetable.getEntry("tx");
+    NetworkTableEntry ty = limetable.getEntry("ty");
+    NetworkTableEntry ta = limetable.getEntry("ta");
+    double x = tx.getDouble(0.0); //Value between -27 and 27; measure vertical angle of target and center.
+    double y = ty.getDouble(0.0); //Value between -20.5 and 20.5; measure horizontal angle of target and center.
+    double area = ta.getDouble(0.0); //percent of target that takes up the entire image
+
+    //Send to Smartdashboard
+    SmartDashboard.putNumber("LimelightX", x);
+    SmartDashboard.putNumber("LimelightY", y);
+    SmartDashboard.putNumber("LimelightArea", area);
+
     // encoder values
     SmartDashboard.putNumber("left Vel:", objects.lMaster.getSelectedSensorVelocity());
     SmartDashboard.putNumber("left Pos:", objects.lMaster.getSelectedSensorPosition());
     SmartDashboard.putNumber("left out %:", objects.lMaster.getMotorOutputPercent());
     SmartDashboard.putBoolean("Out of Phase", faults.SensorOutOfPhase);
+
+
 
   }
 

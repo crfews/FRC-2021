@@ -151,7 +151,7 @@ public class Systems
 
         double mul = 360 * ft;   
         double hPI = pi * .5;
-        double encC = mul/hPI;   // (360 * ft )/ (.5pi) ft = pi*.5
+        double encC = mul/hPI;   
  
         return encC;
     }
