@@ -15,6 +15,8 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode;
+import edu.wpi.cscore.VideoSink;
+import edu.wpi.cscore.VideoSource.ConnectionStrategy;
 import edu.wpi.first.cameraserver.CameraServer;
 //import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -53,6 +55,7 @@ public class Robot extends TimedRobot {
   public static Contants.Objects objects = new Contants.Objects();
   public static NetTables netTables = new NetTables();
   public static NetworkTable limetable;
+  VideoSink m_cameraServer;
 
   // public static Systems ballIntake = new Systems();
 
@@ -83,7 +86,10 @@ public class Robot extends TimedRobot {
     UsbCamera m_usbCamera = new UsbCamera("USB Camera 0", 0);
     m_usbCamera.close();
     UsbCamera m_cameraserv = CameraServer.getInstance().startAutomaticCapture(0);
+    m_cameraServer = CameraServer.getInstance().getServer();
     m_cameraserv.setVideoMode(VideoMode.PixelFormat.kYUYV, 604, 480, 30);
+    m_cameraserv.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
+    m_cameraServer.setSource(m_usbCamera);
     m_chooser.setDefaultOption("Option 1:", kOption1);
     m_chooser.addOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
@@ -178,6 +184,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("left Pos:", objects.lMaster.getSelectedSensorPosition());
     SmartDashboard.putNumber("left out %:", objects.lMaster.getMotorOutputPercent());
     SmartDashboard.putBoolean("Out of Phase", faults.SensorOutOfPhase);
+    //NetworkTableEntry Ca
 
 
 
