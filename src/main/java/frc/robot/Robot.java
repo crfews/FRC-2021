@@ -76,9 +76,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    UsbCamera m_usbCamera = new UsbCamera("USB Camera 0", 0);
+    UsbCamera m_usbCamera = new UsbCamera("USB Camera 0", 1);
     m_usbCamera.close();
-    UsbCamera m_cameraserv = CameraServer.getInstance().startAutomaticCapture(0);
+    UsbCamera m_cameraserv = CameraServer.getInstance().startAutomaticCapture(1);
     m_cameraserv.setVideoMode(VideoMode.PixelFormat.kYUYV, 604, 480, 30);
     m_chooser.setDefaultOption("Option 1:", kOption1);
     m_chooser.addOption("Default Auto", kDefaultAuto);
