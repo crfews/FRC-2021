@@ -20,6 +20,7 @@ public class Contants {
     public double lCannonSpark = 1;
     public double beltSpark = .5;
     public double lift = 1;   //public double 
+    public static double encoderRadius = (12.9)/12;  //IN FEET Distance from center to wheels with encoders 
 
 
      static class IO {

@@ -181,6 +181,10 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_autoSelected = m_chooser.getSelected();
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
+    boolean i0 = true; boolean i1 = false; boolean i2 = false;
+    boolean i3 = false; boolean i4 = false; boolean i5 = false;
+    boolean i6 = false; boolean i7 = false; boolean i8 = false;
+    boolean i9 = false; boolean i10 = false; boolean i11 = false;
     System.out.println("Auto selected: " + m_autoSelected);
     objects.rMaster.setSelectedSensorPosition(0);
     objects.lMaster.setSelectedSensorPosition(0);
@@ -226,23 +230,23 @@ public class Robot extends TimedRobot {
 
     }
 
-/*switch (m_autoSelected) {
+switch (m_autoSelected) {
       case kCustomAuto:
         // Put custom auto code here
         break;
       case kDefaultAuto:
       
         
-      }
+      
         break;
       case kOption1:
 
+
         break;
-      default:
-        // Put default auto code here
+
 
     }
-    */
+    
   
   }
 
