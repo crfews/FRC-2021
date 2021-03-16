@@ -170,7 +170,7 @@ public class Systems
      * @param degAngle the angle you want it to turn towards
      * @return This Method returns true when rotation is complete
      */
-    public boolean Rotation(WPI_TalonSRX lMaster, WPI_TalonSRX rMaster, double degAngle, double index){
+    public boolean rotation(WPI_TalonSRX lMaster, WPI_TalonSRX rMaster, double degAngle, double index){
         if(poscheck == false){
             lEncInit = lMaster.getSelectedSensorPosition();
             rEncInit = rMaster.getSelectedSensorPosition();
