@@ -231,8 +231,8 @@ public class Systems
             }
         }else{
             if((lEncInitForward > (lEncInitForward - encDistance)) && (rEncInitForward > (rEncInitForward - encDistance)) ){
-                lMaster.set(Math.abs(speed));
-                rMaster.set(Math.abs(speed));
+                lMaster.set(-(Math.abs(speed)));
+                rMaster.set(-(Math.abs(speed)));
                 return false;
             }else{
                 if(forcheck == true){
