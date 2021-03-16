@@ -190,6 +190,9 @@ public class Robot extends TimedRobot {
     System.out.println("Auto selected: " + m_autoSelected);
     objects.rMaster.setSelectedSensorPosition(0);
     objects.lMaster.setSelectedSensorPosition(0);
+    i0 = true; i1 = false; i2 = false; i3 = false;
+    i4 = false; i5 = false; i6 = false; i7 = false;
+    i8 = false; i9 = false; i10 = false; i11 = false;
 
   }
 
