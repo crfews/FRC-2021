@@ -12,9 +12,6 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
-
-//NOTE: only put CONSTANTS in these classe
-
 public class Contants {
 
     public static int kXController = 0;
@@ -23,7 +20,6 @@ public class Contants {
     public double lCannonSpark = 1;
     public double beltSpark = .5;
     public double lift = 1;   //public double 
-    public static double bmotorspeed = 0.75;
 
 
      static class IO {
@@ -34,6 +30,23 @@ public class Contants {
             //Xbox controller
             public  XboxController m_drivexbcont = new XboxController(kXController);
 
+            //Axises..Axi?...Axee?
+            public  Double lXaxis = m_drivexbcont.getX(Hand.kLeft);
+            public  Double lYaxis = m_drivexbcont.getY(Hand.kLeft);
+            public  Double rXaxis = m_drivexbcont.getX(Hand.kRight);
+            public  Double rYaxis = m_drivexbcont.getY(Hand.kRight);
+
+            //Buttons
+            public  Boolean xButton = m_drivexbcont.getXButton();
+            public  Boolean aButton = m_drivexbcont.getAButton();
+            public  Boolean bButton = m_drivexbcont.getBButton();
+            public  Boolean yButton = m_drivexbcont.getYButton();
+
+            //Triggers and bumpers
+            public  Double lTrigger = m_drivexbcont.getTriggerAxis(Hand.kLeft);
+            public  Double rTrigger = m_drivexbcont.getTriggerAxis(Hand.kRight);
+            public  Boolean lBumper = m_drivexbcont.getBumper(Hand.kLeft); 
+            public  Boolean rBumper = m_drivexbcont.getBumper(Hand.kRight);
         }
 
         

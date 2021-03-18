@@ -151,7 +151,7 @@ public class Systems
 
         double mul = 360 * ft;   
         double hPI = pi * .5;
-        double encC = mul/hPI;   
+        double encC = mul/hPI;   // (360 * ft )/ (.5pi) ft = pi*.5
  
         return encC;
     }
@@ -238,8 +238,9 @@ public class Systems
      * @param teemo Xbox Controller
      * @param inverse If true, the robot orientation is flipped
      */
-    public void driveTeleop(WPI_TalonSRX rMaster, WPI_TalonSRX lMaster, WPI_TalonSRX rSlave, WPI_TalonSRX lSlave, XboxController teemo) {
+    public void driveTeleop(WPI_TalonSRX rMaster, WPI_TalonSRX lMaster, WPI_TalonSRX rSlave, WPI_TalonSRX lSlave, XboxController teemo, Joystick j) {
         //remember to change this channel!!!
+        toggle(j);
         double invert = 1;
         if (inv == true)
             invert = invert*-1;
@@ -274,7 +275,7 @@ public class Systems
             {
                 l.set(1);
                 r.set(1);
-                b.set(Contants.bmotorspeed);
+                b.set(.5);
             }
             else if (x.getBumper(Hand.kRight) == false && (x.getBumper(Hand.kLeft) == false))
             {
@@ -293,7 +294,7 @@ public class Systems
             {
                 l.set(-.35);
                 r.set(-.35);
-                b.set(Contants.bmotorspeed);
+                b.set(.5);
             }
             else if (x.getBumper(Hand.kRight) == false && x.getBumper(Hand.kLeft) == false)
             {
@@ -303,7 +304,7 @@ public class Systems
             }else if (x.getBumper(Hand.kLeft) == true){
                 l.set(-.1);
                 r.set(-.1);
-                b.set(-Contants.bmotorspeed);
+                b.set(-.5);
             }
         }
         
