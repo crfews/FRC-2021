@@ -24,12 +24,14 @@ public class Systems
 
     public static Contants constants = new Contants();
     public static ButtonBoard buttonBoard = new ButtonBoard();
-    boolean runrot = true;
+
     boolean poscheck = false;
+    double turn;
     double lEncInit;
     double rEncInit;
-    boolean runlinearmotion = true;
+
     boolean forcheck = false;
+    double encDistance;
     double lEncInitForward;
     double rEncInitForward;
 
@@ -171,13 +173,14 @@ public class Systems
      * @return This Method returns true when rotation is complete
      */
     public boolean rotation(WPI_TalonSRX lMaster, WPI_TalonSRX rMaster, double degAngle, double index){
+        double radius = Contants.encoderRadius;
+        
         if(poscheck == false){
             lEncInit = lMaster.getSelectedSensorPosition();
             rEncInit = rMaster.getSelectedSensorPosition();
             poscheck = true;
+            turn = (radius*Math.PI*degAngle*2)/360;
         }
-        double radius = Contants.encoderRadius;
-        double turn = (radius*Math.PI*degAngle*2)/360;
         if(index == 1){
             if((lEncInit+turn) > lMaster.getSelectedSensorPosition() && (rEncInit-turn) < rMaster.getSelectedSensorPosition()){
                 lMaster.set(.3);
@@ -215,9 +218,10 @@ public class Systems
         if(forcheck == false){
             lEncInitForward = lMaster.getSelectedSensorPosition();
             rEncInitForward = rMaster.getSelectedSensorPosition();
+            encDistance = feetToEnc(feet);
             forcheck = true;
         }
-        double encDistance = feetToEnc(feet);
+    
         if(index == 1){
             if((lEncInitForward < (lEncInitForward + encDistance)) && (rEncInitForward < (rEncInitForward + encDistance)) ){
                 lMaster.set(Math.abs(speed));

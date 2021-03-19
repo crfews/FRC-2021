@@ -18,6 +18,7 @@ import edu.wpi.cscore.VideoMode;
 import edu.wpi.first.cameraserver.CameraServer;
 //import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 //import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -31,6 +32,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
+
+  private double startTime;
 
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
@@ -52,14 +55,11 @@ public class Robot extends TimedRobot {
 
   // variables and constants
   // private boolean rdIndicator = false;
-  int time = 0;
 
   private final Faults faults = new Faults();
 
-  boolean i0 = true; boolean i1 = false; boolean i2 = false;
-  boolean i3 = false; boolean i4 = false; boolean i5 = false;
-  boolean i6 = false; boolean i7 = false; boolean i8 = false;
-  boolean i9 = false; boolean i10 = false; boolean i11 = false;
+  static boolean i0 = true;
+  static boolean i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11 = false;
 
   // color strings
   //private String gameData;
@@ -166,6 +166,11 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("left Vel:", objects.lMaster.getSelectedSensorVelocity());
     SmartDashboard.putNumber("left Pos:", objects.lMaster.getSelectedSensorPosition());
     SmartDashboard.putNumber("left out %:", objects.lMaster.getMotorOutputPercent());
+
+    SmartDashboard.putNumber("left Vel:", objects.rMaster.getSelectedSensorVelocity());
+    SmartDashboard.putNumber("left Pos:", objects.rMaster.getSelectedSensorPosition());
+    SmartDashboard.putNumber("left out %:", objects.rMaster.getMotorOutputPercent());
+
     SmartDashboard.putBoolean("Out of Phase", faults.SensorOutOfPhase);
 
   }
@@ -184,6 +189,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    startTime = Timer.getFPGATimestamp();
     m_autoSelected = m_chooser.getSelected();
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
 
@@ -201,6 +207,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    double time = Timer.getFPGATimestamp();
 
    /**
     //get position of the encoder
@@ -209,7 +216,7 @@ public class Robot extends TimedRobot {
     int lEnc = objects.lMaster.getSelectedSensorPosition();
 
     
-    int i = lEnc;
+    int i = (lEnc+rEnc)/2;
 
     
     if(i > -systems.feetToEnc(Math.PI*.5)) {
@@ -238,8 +245,19 @@ public class Robot extends TimedRobot {
     */
 
 switch (m_autoSelected) {
+      //test encoder values. Values can be found on github AND should be outputted by code
       case kCustomAuto:
-        // Put custom auto code here
+
+      System.out.println("r: " + objects.rMaster.getSelectedSensorPosition());
+      System.out.println("l: " + objects.lMaster.getSelectedSensorPosition());
+
+      if (time - startTime < 3) {
+        objects.rMaster.set(.5);
+        objects.lMaster.set(.5);
+      } else {
+        objects.rMaster.set(0);
+        objects.lMaster.set(0);
+      }
         break;
       case kDefaultAuto:
       
@@ -248,7 +266,7 @@ switch (m_autoSelected) {
 
       if (i0 == true){
         if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
-          systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+          //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
         }else{
           i0 = false;
           i1 = true;
@@ -257,10 +275,10 @@ switch (m_autoSelected) {
 
       if(i1 == true){
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
-          systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
+          //systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
         }else{
           if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
-            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+            //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i1 = false;
             i2 = true;
@@ -270,10 +288,10 @@ switch (m_autoSelected) {
 
       if(i2 == true){
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, 1) == false){
-          systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
+          //systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
         }else{
           if(systems.linearMotion(objects.lMaster, objects.rMaster, 15, .3, 1) == false){
-            systems.linearMotion(objects.lMaster, objects.rMaster, 15, .3, 1);
+            //systems.linearMotion(objects.lMaster, objects.rMaster, 15, .3, 1);
           }else{
             i2 = false;
             i3 = true;
@@ -283,10 +301,10 @@ switch (m_autoSelected) {
 
       if(i3 == true){
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, 1) == false){
-          systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
+          //systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
         }else{
           if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
-            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+            //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i3 = false;
             i4 = true;
@@ -295,10 +313,10 @@ switch (m_autoSelected) {
       }
       if(i4 == true){
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
-          systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
+          //systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
         }else{
           if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
-            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+            //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i4 = false;
             i5 = true;
@@ -307,10 +325,10 @@ switch (m_autoSelected) {
       }
       if(i5 == true){
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
-          systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
+          //systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
         }else{
           if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
-            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+            //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i5 = false;
             i6 = true;
@@ -319,10 +337,10 @@ switch (m_autoSelected) {
       }
       if(i6 == true){
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
-          systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
+          //systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
         }else{
           if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
-            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+            //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i6 = false;
             i7 = true;
@@ -331,10 +349,10 @@ switch (m_autoSelected) {
       }
       if(i7 == true){
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
-          systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
+          //systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
         }else{
           if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
-            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+            //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i7 = false;
             i8 = true;
@@ -343,10 +361,10 @@ switch (m_autoSelected) {
       }
       if(i8 == true){
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, 1) == false){
-          systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
+          //systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
         }else{
           if(systems.linearMotion(objects.lMaster, objects.rMaster, 15, .3, 1) == false){
-            systems.linearMotion(objects.lMaster, objects.rMaster, 15, .3, 1);
+            //systems.linearMotion(objects.lMaster, objects.rMaster, 15, .3, 1);
           }else{
             i8 = false;
             i9 = true;
@@ -355,10 +373,10 @@ switch (m_autoSelected) {
       }
       if(i9 == true){
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, 1) == false){
-          systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
+          //systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
         }else{
           if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
-            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+            //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i9 = false;
             i10 = true;
@@ -367,10 +385,10 @@ switch (m_autoSelected) {
       }
       if(i10 == true){
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
-          systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
+          //systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
         }else{
           if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
-            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+            //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i10 = false;
             i11 = true;
@@ -395,7 +413,7 @@ switch (m_autoSelected) {
    */
   @Override
   public void teleopPeriodic() {
-    time++;
+
 
     // the color of the wheel; B = 1; G = 2; R = 3; Y = 4; none = 0;
     //int gameColor = innerSystems.gameData_Color();
