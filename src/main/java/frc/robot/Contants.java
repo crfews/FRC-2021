@@ -21,6 +21,8 @@ public class Contants {
     public double beltSpark = .5;
     public double lift = 1;   //public double 
     public static double encoderRadius = (12.9)/12;  //IN FEET Distance from center to wheels with encoders 
+    public double autonomousSpeed = .3;             //Speed of linear motion in autonomous
+    public double autonomusTurnSpeed = .3;          //Turn speed during autonomous
 
 
      static class IO {

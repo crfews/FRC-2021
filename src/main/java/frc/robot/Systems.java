@@ -183,8 +183,8 @@ public class Systems
         }
         if(index == 1){
             if((lEncInit+turn) > lMaster.getSelectedSensorPosition() && (rEncInit-turn) < rMaster.getSelectedSensorPosition()){
-                lMaster.set(.3);
-                rMaster.set(-.3);
+                lMaster.set(constants.autonomusTurnSpeed);
+                rMaster.set(-constants.autonomusTurnSpeed);
                 return false;
             }else{
                 if(poscheck == true){
@@ -195,8 +195,8 @@ public class Systems
         }
         else{
             if((lEncInit-turn) < lMaster.getSelectedSensorPosition() && (rEncInit+turn) > rMaster.getSelectedSensorPosition()){
-                lMaster.set(-.3);
-                rMaster.set(.3);
+                lMaster.set(-constants.autonomusTurnSpeed);
+                rMaster.set(constants.autonomusTurnSpeed);
                 return false;
             }else{
                 if(poscheck == true){

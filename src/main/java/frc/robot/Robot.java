@@ -265,7 +265,7 @@ switch (m_autoSelected) {
       case kOption1:
 
       if (i0 == true){
-        if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
+        if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, con.autonomousSpeed, 1) == false){
           //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
         }else{
           i0 = false;
@@ -277,7 +277,7 @@ switch (m_autoSelected) {
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
           //systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
         }else{
-          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
+          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, con.autonomousSpeed, 1) == false){
             //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i1 = false;
@@ -290,7 +290,7 @@ switch (m_autoSelected) {
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, 1) == false){
           //systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
         }else{
-          if(systems.linearMotion(objects.lMaster, objects.rMaster, 15, .3, 1) == false){
+          if(systems.linearMotion(objects.lMaster, objects.rMaster, 15, con.autonomousSpeed, 1) == false){
             //systems.linearMotion(objects.lMaster, objects.rMaster, 15, .3, 1);
           }else{
             i2 = false;
@@ -303,7 +303,7 @@ switch (m_autoSelected) {
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, 1) == false){
           //systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
         }else{
-          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
+          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, con.autonomousSpeed, 1) == false){
             //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i3 = false;
@@ -315,7 +315,7 @@ switch (m_autoSelected) {
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
           //systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
         }else{
-          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
+          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, con.autonomousSpeed, 1) == false){
             //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i4 = false;
@@ -327,7 +327,7 @@ switch (m_autoSelected) {
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
           //systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
         }else{
-          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
+          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, con.autonomousSpeed, 1) == false){
             //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i5 = false;
@@ -339,7 +339,7 @@ switch (m_autoSelected) {
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
           //systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
         }else{
-          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
+          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, con.autonomousSpeed, 1) == false){
             //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i6 = false;
@@ -351,7 +351,7 @@ switch (m_autoSelected) {
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
           //systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
         }else{
-          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
+          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, con.autonomousSpeed, 1) == false){
             //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i7 = false;
@@ -363,7 +363,7 @@ switch (m_autoSelected) {
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, 1) == false){
           //systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
         }else{
-          if(systems.linearMotion(objects.lMaster, objects.rMaster, 15, .3, 1) == false){
+          if(systems.linearMotion(objects.lMaster, objects.rMaster, 15, con.autonomousSpeed, 1) == false){
             //systems.linearMotion(objects.lMaster, objects.rMaster, 15, .3, 1);
           }else{
             i8 = false;
@@ -375,7 +375,7 @@ switch (m_autoSelected) {
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, 1) == false){
           //systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
         }else{
-          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
+          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, con.autonomousSpeed, 1) == false){
             //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i9 = false;
@@ -387,7 +387,7 @@ switch (m_autoSelected) {
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
           //systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
         }else{
-          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
+          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, con.autonomousSpeed, 1) == false){
             //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i10 = false;
