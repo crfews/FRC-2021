@@ -18,6 +18,7 @@ import edu.wpi.cscore.VideoMode;
 import edu.wpi.first.cameraserver.CameraServer;
 //import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 //import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -32,6 +33,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
 
+  
+  private double startTime;
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private static final String kOption1 = "Option 1";
@@ -55,6 +58,11 @@ public class Robot extends TimedRobot {
   int time = 0;
 
   private final Faults faults = new Faults();
+
+  boolean i0 = true; boolean i1 = false; boolean i2 = false;
+  boolean i3 = false; boolean i4 = false; boolean i5 = false;
+  boolean i6 = false; boolean i7 = false; boolean i8 = false;
+  boolean i9 = false; boolean i10 = false; boolean i11 = false;
 
   // color strings
   //private String gameData;
@@ -105,6 +113,7 @@ public class Robot extends TimedRobot {
     objects.intakeSpark.setInverted(true);
     objects.lMaster.setInverted(true);
     objects.lSlave.setInverted(true);
+    
 
 
   }
@@ -179,11 +188,17 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    startTime = Timer.getFPGATimestamp();
+
     m_autoSelected = m_chooser.getSelected();
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
+
     System.out.println("Auto selected: " + m_autoSelected);
     objects.rMaster.setSelectedSensorPosition(0);
     objects.lMaster.setSelectedSensorPosition(0);
+    i0 = true; i1 = false; i2 = false; i3 = false;
+    i4 = false; i5 = false; i6 = false; i7 = false;
+    i8 = false; i9 = false; i10 = false; i11 = false;
 
   }
 
@@ -193,6 +208,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
 
+    double time = Timer.getFPGATimestamp();
+    /**
     //get position of the encoder
 
     int rEnc = objects.rMaster.getSelectedSensorPosition();
@@ -225,24 +242,167 @@ public class Robot extends TimedRobot {
     }else{
 
     }
+    */
 
-/*switch (m_autoSelected) {
-      case kCustomAuto:
+switch (m_autoSelected) {
+      case kOption1:
         // Put custom auto code here
+        System.out.println("r: " + objects.rMaster.getSelectedSensorPosition());
+        System.out.println("l: " + objects.lMaster.getSelectedSensorPosition());
+        if(time - startTime < 3) {
+          objects.rMaster.set(-.5);
+          objects.lMaster.set(-.5);
+        } else {
+          objects.rMaster.set(0);
+          objects.lMaster.set(0);
+        }
         break;
       case kDefaultAuto:
       
-        
-      }
         break;
-      case kOption1:
+      case kCustomAuto:
+
+      if (i0 == true){
+        if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
+          systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+        }else{
+          i0 = false;
+          i1 = true;
+        }
+      }
+
+      if(i1 == true){
+        if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
+          systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
+        }else{
+          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
+            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+          }else{
+            i1 = false;
+            i2 = true;
+          }
+        }
+      }
+
+      if(i2 == true){
+        if(systems.rotation(objects.lMaster, objects.rMaster, 90, 1) == false){
+          systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
+        }else{
+          if(systems.linearMotion(objects.lMaster, objects.rMaster, 15, .3, 1) == false){
+            systems.linearMotion(objects.lMaster, objects.rMaster, 15, .3, 1);
+          }else{
+            i2 = false;
+            i3 = true;
+          }
+        }
+      }
+
+      if(i3 == true){
+        if(systems.rotation(objects.lMaster, objects.rMaster, 90, 1) == false){
+          systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
+        }else{
+          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
+            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+          }else{
+            i3 = false;
+            i4 = true;
+          }
+        }
+      }
+      if(i4 == true){
+        if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
+          systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
+        }else{
+          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
+            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+          }else{
+            i4 = false;
+            i5 = true;
+          }
+        }
+      }
+      if(i5 == true){
+        if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
+          systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
+        }else{
+          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
+            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+          }else{
+            i5 = false;
+            i6 = true;
+          }
+        }
+      }
+      if(i6 == true){
+        if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
+          systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
+        }else{
+          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
+            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+          }else{
+            i6 = false;
+            i7 = true;
+          }
+        }
+      }
+      if(i7 == true){
+        if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
+          systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
+        }else{
+          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
+            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+          }else{
+            i7 = false;
+            i8 = true;
+          }
+        }
+      }
+      if(i8 == true){
+        if(systems.rotation(objects.lMaster, objects.rMaster, 90, 1) == false){
+          systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
+        }else{
+          if(systems.linearMotion(objects.lMaster, objects.rMaster, 15, .3, 1) == false){
+            systems.linearMotion(objects.lMaster, objects.rMaster, 15, .3, 1);
+          }else{
+            i8 = false;
+            i9 = true;
+          }
+        }
+      }
+      if(i9 == true){
+        if(systems.rotation(objects.lMaster, objects.rMaster, 90, 1) == false){
+          systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
+        }else{
+          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
+            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+          }else{
+            i9 = false;
+            i10 = true;
+          }
+        }
+      }
+      if(i10 == true){
+        if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
+          systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
+        }else{
+          if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
+            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+          }else{
+            i10 = false;
+            i11 = true;
+          }
+        }
+      }
+      if(i11 == true){
+        objects.lMaster.set(0);
+        objects.rMaster.set(0);
+      }
 
         break;
-      default:
-        // Put default auto code here
+
 
     }
-    */
+    
   
   }
 

@@ -25,6 +25,16 @@ public class Systems
     public static Contants constants = new Contants();
     public static ButtonBoard buttonBoard = new ButtonBoard();
 
+    boolean poscheck = false;
+    double turn;
+    double lEncInit;
+    double rEncInit;
+
+    boolean forcheck = false;
+    double encDistance;
+    double lEncInitForward;
+    double rEncInitForward;
+
 
     /**
      * sets encoder value of given talon to zero
@@ -155,7 +165,87 @@ public class Systems
  
         return encC;
     }
+
+   /**
+     * This method will rotate the robot given a specified angle and direction
+     * @param index -1 if counterclockwise, 1 if clockwise
+     * @param degAngle the angle you want it to turn towards
+     * @return This Method returns true when rotation is complete
+     */
+    public boolean rotation(WPI_TalonSRX lMaster, WPI_TalonSRX rMaster, double degAngle, double index){
+        double radius = Contants.encoderRadius;
+        
+        if(poscheck == false){
+            lEncInit = -lMaster.getSelectedSensorPosition();
+            rEncInit = rMaster.getSelectedSensorPosition();
+            poscheck = true;
+            turn = (radius*Math.PI*degAngle*2)/360;
+        }
+        if(index == 1){
+            if((lEncInit+turn) > -lMaster.getSelectedSensorPosition() && (rEncInit-turn) < rMaster.getSelectedSensorPosition()){
+                lMaster.set(constants.autonomusTurnSpeed);
+                rMaster.set(-constants.autonomusTurnSpeed);
+                return false;
+            }else{
+                if(poscheck == true){
+                    poscheck = false;
+                }
+                return true;
+            }
+        }
+        else{
+            if((lEncInit-turn) < -lMaster.getSelectedSensorPosition() && (rEncInit+turn) > rMaster.getSelectedSensorPosition()){
+                lMaster.set(-constants.autonomusTurnSpeed);
+                rMaster.set(constants.autonomusTurnSpeed);
+                return false;
+            }else{
+                if(poscheck == true){
+                    poscheck = false;
+                }
+                return true;
+                
+            }
+        }   
+    }
+    /**
+     * This method will move linearly given a direction and distance
+     * @param index -1 if backwards, 1 if forwards
+     * @param feet the distance in feet you want to move
+     * @param speed the speed at which you want the motors to move at (Positive value)
+     * @return This Method returns true when rotation is complete
+     */
+    public boolean linearMotion(WPI_TalonSRX lMaster, WPI_TalonSRX rMaster, double feet, double speed, double index){
+        if(forcheck == false){
+            lEncInitForward = -lMaster.getSelectedSensorPosition();
+            rEncInitForward = rMaster.getSelectedSensorPosition();
+            encDistance = feetToEnc(feet);
+            forcheck = true;
+        }
     
+        if(index == 1){
+            if((-lMaster.getSelectedSensorPosition() < (lEncInitForward + encDistance)) && (rMaster.getSelectedSensorPosition() < (rEncInitForward + encDistance)) ){
+                lMaster.set(Math.abs(speed));
+                rMaster.set(Math.abs(speed));
+                return false;
+            }else{
+                if(forcheck == true){
+                    forcheck = false;
+                }
+                return true;
+            }
+        }else{
+            if((-lMaster.getSelectedSensorPosition() > (lEncInitForward - encDistance)) && (rMaster.getSelectedSensorPosition() > (rEncInitForward - encDistance)) ){
+                lMaster.set(-(Math.abs(speed)));
+                rMaster.set(-(Math.abs(speed)));
+                return false;
+            }else{
+                if(forcheck == true){
+                    forcheck = false;
+                }
+                return true;
+            }
+        }
+    }
     /**
      * Moves climb moter
      * @param spark spark motor
