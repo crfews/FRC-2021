@@ -245,7 +245,7 @@ public class Robot extends TimedRobot {
     */
 
 switch (m_autoSelected) {
-      case kOption1:
+      case kCustomAuto:
         // Put custom auto code here
         System.out.println("r: " + objects.rMaster.getSelectedSensorPosition());
         System.out.println("l: " + objects.lMaster.getSelectedSensorPosition());
@@ -260,7 +260,7 @@ switch (m_autoSelected) {
       case kDefaultAuto:
       
         break;
-      case kCustomAuto:
+      case kOption1:
 
       if (i0 == true){
         if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
