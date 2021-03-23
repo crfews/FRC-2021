@@ -182,7 +182,7 @@ public class Systems
             turn = (radius*Math.PI*degAngle*2)/360;
         }
         if(index == 1){
-            if((lEncInit+turn) > -lMaster.getSelectedSensorPosition() && (rEncInit-turn) < rMaster.getSelectedSensorPosition()){
+            if((lEncInit+turn) > -lMaster.getSelectedSensorPosition() /* && (rEncInit-turn) < rMaster.getSelectedSensorPosition() */ ){
                 lMaster.set(constants.autonomusTurnSpeed);
                 rMaster.set(-constants.autonomusTurnSpeed);
                 return false;
@@ -194,7 +194,7 @@ public class Systems
             }
         }
         else{
-            if((lEncInit-turn) < -lMaster.getSelectedSensorPosition() && (rEncInit+turn) > rMaster.getSelectedSensorPosition()){
+            if((lEncInit-turn) < -lMaster.getSelectedSensorPosition()/* && (rEncInit+turn) > rMaster.getSelectedSensorPosition()*/){
                 lMaster.set(-constants.autonomusTurnSpeed);
                 rMaster.set(constants.autonomusTurnSpeed);
                 return false;
@@ -223,7 +223,7 @@ public class Systems
         }
     
         if(index == 1){
-            if((-lMaster.getSelectedSensorPosition() < (lEncInitForward + encDistance)) && (rMaster.getSelectedSensorPosition() < (rEncInitForward + encDistance)) ){
+            if((-lMaster.getSelectedSensorPosition() < (lEncInitForward + encDistance)) /* && (rMaster.getSelectedSensorPosition() < (rEncInitForward + encDistance)) */ ){
                 lMaster.set(Math.abs(speed));
                 rMaster.set(Math.abs(speed));
                 return false;
@@ -234,7 +234,7 @@ public class Systems
                 return true;
             }
         }else{
-            if((-lMaster.getSelectedSensorPosition() > (lEncInitForward - encDistance)) && (rMaster.getSelectedSensorPosition() > (rEncInitForward - encDistance)) ){
+            if((-lMaster.getSelectedSensorPosition() > (lEncInitForward - encDistance)) /* && (rMaster.getSelectedSensorPosition() > (rEncInitForward - encDistance))*/ ){
                 lMaster.set(-(Math.abs(speed)));
                 rMaster.set(-(Math.abs(speed)));
                 return false;

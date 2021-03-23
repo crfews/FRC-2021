@@ -264,7 +264,7 @@ switch (m_autoSelected) {
 
       if (i0 == true){
         if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
-          systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+          //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
         }else{
           i0 = false;
           i1 = true;
@@ -273,10 +273,10 @@ switch (m_autoSelected) {
 
       if(i1 == true){
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
-          systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
+          //systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
         }else{
           if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
-            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+            //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i1 = false;
             i2 = true;
@@ -286,10 +286,10 @@ switch (m_autoSelected) {
 
       if(i2 == true){
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, 1) == false){
-          systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
+          //systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
         }else{
           if(systems.linearMotion(objects.lMaster, objects.rMaster, 15, .3, 1) == false){
-            systems.linearMotion(objects.lMaster, objects.rMaster, 15, .3, 1);
+            //systems.linearMotion(objects.lMaster, objects.rMaster, 15, .3, 1);
           }else{
             i2 = false;
             i3 = true;
@@ -299,10 +299,10 @@ switch (m_autoSelected) {
 
       if(i3 == true){
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, 1) == false){
-          systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
+          //systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
         }else{
           if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
-            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+            //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i3 = false;
             i4 = true;
@@ -311,10 +311,10 @@ switch (m_autoSelected) {
       }
       if(i4 == true){
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
-          systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
+          //systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
         }else{
           if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
-            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+            //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i4 = false;
             i5 = true;
@@ -323,10 +323,10 @@ switch (m_autoSelected) {
       }
       if(i5 == true){
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
-          systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
+          //systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
         }else{
           if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
-            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+            //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i5 = false;
             i6 = true;
@@ -335,10 +335,10 @@ switch (m_autoSelected) {
       }
       if(i6 == true){
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
-          systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
+          //systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
         }else{
           if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
-            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+            //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i6 = false;
             i7 = true;
@@ -347,10 +347,10 @@ switch (m_autoSelected) {
       }
       if(i7 == true){
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
-          systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
+          //systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
         }else{
           if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
-            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+            //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i7 = false;
             i8 = true;
@@ -359,10 +359,10 @@ switch (m_autoSelected) {
       }
       if(i8 == true){
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, 1) == false){
-          systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
+          //systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
         }else{
           if(systems.linearMotion(objects.lMaster, objects.rMaster, 15, .3, 1) == false){
-            systems.linearMotion(objects.lMaster, objects.rMaster, 15, .3, 1);
+            //systems.linearMotion(objects.lMaster, objects.rMaster, 15, .3, 1);
           }else{
             i8 = false;
             i9 = true;
@@ -371,10 +371,10 @@ switch (m_autoSelected) {
       }
       if(i9 == true){
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, 1) == false){
-          systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
+          //systems.rotation(objects.lMaster, objects.rMaster, 90, 1);
         }else{
           if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
-            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+            //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i9 = false;
             i10 = true;
@@ -383,10 +383,10 @@ switch (m_autoSelected) {
       }
       if(i10 == true){
         if(systems.rotation(objects.lMaster, objects.rMaster, 90, -1) == false){
-          systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
+          //systems.rotation(objects.lMaster, objects.rMaster, 90, -1);
         }else{
           if(systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1) == false){
-            systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
+            //systems.linearMotion(objects.lMaster, objects.rMaster, 5, .3, 1);
           }else{
             i10 = false;
             i11 = true;
